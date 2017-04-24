@@ -69,6 +69,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             ],
             'default_operation_path_resolver' => 'api_platform.operation_path_resolver.underscore',
             'name_converter' => null,
+            'api_resources_directory' => 'Entity',
             'enable_fos_user' => false,
             'enable_nelmio_api_doc' => false,
             'enable_swagger' => true,

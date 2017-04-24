@@ -40,6 +40,7 @@ class ApiPlatformExtensionTest extends \PHPUnit_Framework_TestCase
     const DEFAULT_CONFIG = ['api_platform' => [
         'title' => 'title',
         'description' => 'description',
+        'api_resources_directory' => 'Entity',
         'version' => 'version',
         'formats' => [
             'jsonld' => ['mime_types' => ['application/ld+json']],
@@ -206,6 +207,7 @@ class ApiPlatformExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $containerBuilderProphecy = $this->getContainerBuilderProphecy();
         $containerBuilderProphecy->setParameter('api_platform.eager_loading.enabled', false)->shouldBeCalled();
+        $containerBuilderProphecy->setParameter('api_platform.api_resources_directory', 'Entity')->shouldBeCalled();
         $containerBuilderProphecy->removeDefinition('api_platform.doctrine.orm.query_extension.eager_loading')->shouldBeCalled();
         $containerBuilderProphecy->removeDefinition('api_platform.doctrine.orm.query_extension.filter_eager_loading')->shouldBeCalled();
         $containerBuilder = $containerBuilderProphecy->reveal();
@@ -234,6 +236,7 @@ class ApiPlatformExtensionTest extends \PHPUnit_Framework_TestCase
             'api_platform.collection.pagination.items_per_page_parameter_name' => 'itemsPerPage',
             'api_platform.collection.pagination.maximum_items_per_page' => null,
             'api_platform.collection.pagination.page_parameter_name' => 'page',
+            'api_platform.api_resources_directory' => 'Entity',
             'api_platform.description' => 'description',
             'api_platform.error_formats' => ['jsonproblem' => ['application/problem+json'], 'jsonld' => ['application/ld+json']],
             'api_platform.oauth.enabled' => false,
@@ -411,6 +414,7 @@ class ApiPlatformExtensionTest extends \PHPUnit_Framework_TestCase
         }
 
         $containerBuilderProphecy->getParameter('kernel.debug')->willReturn(false);
+        $containerBuilderProphecy->getParameter('api_platform.api_resources_directory')->willReturn('Entity');
 
         return $containerBuilderProphecy;
     }
